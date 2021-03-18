@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  --bar-bg-color: #6e6f70;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+#filters {
+  text-align: center;
+  line-height: 6rem;
+  height: 6rem;
+  margin-bottom: 2rem;
+}
+
+.bar {
+  display: block;
+  background-color: var(--bar-bg-color);
+  margin-bottom: 1rem;
+}

@@ -6,9 +6,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reorg Case Study</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://d3js.org/d3.v6.min.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
-  <h1>Hello World</h1>
+  
+  <div id="app">
+    <div id="filters">
+      <span>Sort by:</span>
+      <select name="Games" id="games">
+        <option value selected disabled>Select a Game</option>
+        <option value="backgammon">Backgammon</option>
+        <option value="battleship">Battleship</option>
+        <option value="blockade">Blockade</option>
+        <option value="checkers">Checkers</option>
+        <option value="chess">Chess</option>
+        <option value="crosscircle">Cross and Circle</option>
+        <option value="othello">Othello</option>
+      </select>
+      <select name="Countries" id="countries">
+        <option value selected disabled>Select a Country</option>
+        <option value="argentina">Argentina</option>
+        <option value="brazil">Brazil</option>
+        <option value="belgium">Belgium</option>
+        <option value="colombia">Colombia</option>
+        <option value="france">France</option>
+        <option value="germany">Germany</option>
+        <option value="greece">Greece</option>
+        <option value="iceland">Iceland</option>
+        <option value="ireland">Ireland</option>
+        <option value="italy">Italy</option>
+        <option value="luxembourg">Luxembourg</option>
+        <option value="malta">Malta</option>
+        <option value="norway">Norway</option>
+        <option value="peru">Peru</option>
+        <option value="portugal">Portugal</option>
+        <option value="spain">Spain</option>
+        <option value="sweden">Sweden</option>
+        <option value="unitedkingdom">United Kingdom</option>
+        <option value="uruguay">Uruguay</option>
+        <option value="venezuela">Venezuela</option>
+      </select>
+      <button id="submit-btn">Submit</button>
+      <button id="reset-btn">Reset</button>
+    </div>
+
+    <div id="graph"></div>
+  </div>
+
 </body>
 </html>
