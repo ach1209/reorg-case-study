@@ -1,6 +1,5 @@
 const graphWidth = 1000;
 const graphHeight = 1500;
-let chartData = [];
 
 const graph = d3.select('#graph')
   .append('svg')
@@ -11,15 +10,13 @@ const graph = d3.select('#graph')
   .append('g')
     .attr('transform', 'translate(10, 0)')
 
-d3.csv('./data/generic-dataset.csv', (data) => {
-  chartData.push(data);
-
-  const barWidth = data.Total.slice(1, -3).split(',').join(''); // Remove currency symbol and comma
-  const barHeight = chartData.length;
+d3.csv('./data/generic-dataset.csv').then((data) => {
+  
+  data.sort((x, y) => d3.descending(x.Total, y.Total));
 
   // X-Axis
   const x = d3.scaleLinear()
-    .domain([0, graphWidth + 100]) // Numbers across x-axis
+    .domain([0, graphWidth]) // Numbers across x-axis
     .range([0, graphWidth]);
 
   graph.append('g')
@@ -28,32 +25,33 @@ d3.csv('./data/generic-dataset.csv', (data) => {
       .attr('font-size', 16);
 
   // Y-Axis
-  const y = d3.scaleBand()
-    .range([0, graphHeight]);
+  const y = d3.scaleBand()  // Controls y attribute and positioning for bars
+    .domain(d3.range(data.length))
+    .range([0, graphHeight])
+    .padding(2);
 
   graph.append('g')
     .call(d3.axisLeft(y));
 
   // Bars
   const bar = graph.selectAll('.bar')
-    .data(chartData)
+    .data(data)
     .enter();
 
   bar.append('rect')
     .attr('x', 0)
-    .attr('y', ((y.bandwidth() / graphWidth ) + (3 * barHeight)) * 10) // Vertical positioning of bars
-    .attr('width', barWidth / graphWidth)
+    .attr('y', (d, i) => y(i))
+    .attr('width', (d) => d.Total.slice(1, -3).split(',').join('') / graphWidth)
     .attr('height', 20)
     .style('fill', 'royalblue')
     .classed('bar', true);
 
   bar.append('text')
     .attr('x', 20)
-    .attr('y', (((y.bandwidth() / graphWidth ) + (3 * barHeight)) * 10) + 15)
+    .attr('y', (d, i) => y(i) + 15)
     .attr('font-weight', 'bold')
     .attr('font-size', 12)
     .style('fill', 'white')
-    .text(d => `${d.First} ${d.Last} - ${d.Game} - ${d.Country} - ${d.Total}`)
-    .sort((x, y) => d3.descending(x.Total, y.Total));
+    .text(d => `${d.First} ${d.Last} - ${d.Game} - ${d.Country} - ${d.Total}`);
 
 });
