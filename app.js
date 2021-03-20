@@ -31,7 +31,7 @@ d3.csv('./data/generic-dataset.csv').then((data) => {
     .padding(2);
 
   graph.append('g')
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y).tickFormat(d => '').tickSize(0));
 
   // Bars
   const bar = graph.selectAll('.bar')
