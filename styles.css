@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 :root {
-  --bar-bg-color: rgb(110, 111, 112);
+  --color: rgb(110, 111, 112);
 }
 
 * {
@@ -28,9 +28,24 @@ body {
 
 #reset-btn {
   padding: 1rem 1.5rem;
-  background-color: var(--bar-bg-color);
+  background-color: var(--color);
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+#graph {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.graph-title {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  color: var(--color);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
 }

@@ -18,36 +18,41 @@ d3.csv('./data/generic-dataset.csv').then((data) => {
   function createGraph(dataset = data) {
     dataset.sort((x, y) => d3.descending(x.Total, y.Total));
 
-    const graph = d3.select('#graph')
-      .append('svg')
-        .attr('width', '100%')
-        .attr('height', graphHeight)
-        .attr('viewbox', [0, 0, graphWidth, graphHeight])
-        .attr('preserveAspectRatio','xMinYMin')
+    const graph = d3.select('#graph');
+    
+    const title = graph.append('text')
+      .classed('graph-title', true)
+      .text('Total Earnings');
+
+    const svg = graph.append('svg')
+      .attr('width', '100%')
+      .attr('height', graphHeight)
+      .attr('viewbox', [0, 0, graphWidth, graphHeight])
+      .attr('preserveAspectRatio','xMinYMin')
       .append('g')
-        .attr('transform', 'translate(10, 0)')
+        .attr('transform', 'translate(10, 0)');
 
     // X-Axis
     const x = d3.scaleLinear()
       .domain([0, graphWidth]) // Numbers across x-axis
       .range([0, graphWidth]);
 
-    graph.append('g')
-    .call(d3.axisBottom(x))
-    .selectAll('text')
-      .attr('font-size', 16);
+    svg.append('g')
+      .call(d3.axisBottom(x))
+      .selectAll('text')
+        .attr('font-size', 16);
 
     // Y-Axis
     const y = d3.scaleBand()  // Controls y attribute and positioning for bars
       .domain(d3.range(dataset.length))
-      .range([0, dataset.length < 50 ? 50 * dataset.length : graphHeight ])
+      .range([0, dataset.length < 50 ? (50 * dataset.length) + 50 : graphHeight ])
       .padding(2);
 
-    graph.append('g')
+    svg.append('g')
       .call(d3.axisLeft(y).tickFormat(d => '').tickSize(0));
 
     // Bars
-    const bar = graph.selectAll('.bar')
+    const bar = svg.selectAll('.bar')
       .data(dataset)
       .enter();
 
@@ -56,7 +61,7 @@ d3.csv('./data/generic-dataset.csv').then((data) => {
       .attr('y', (d, i) => y(i))
       .attr('width', (d) => d.Total.slice(1, -3).split(',').join('') / graphWidth)
       .attr('height', 20)
-      .style('fill', 'royalblue')
+      .style('fill', '#6e6f70')
       .classed('bar', true);
 
     bar.append('text')
