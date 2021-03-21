@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
+:root {
+  --bar-bg-color: rgb(110, 111, 112);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,4 +24,13 @@ body {
   line-height: 6rem;
   height: 6rem;
   margin-bottom: 2rem;
+}
+
+#reset-btn {
+  padding: 1rem 1.5rem;
+  background-color: var(--bar-bg-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
