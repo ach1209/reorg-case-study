@@ -27,10 +27,8 @@ d3.csv('./data/generic-dataset.csv').then((data) => {
     const svg = graph.append('svg')
       .attr('width', '100%')
       .attr('height', graphHeight)
-      .attr('viewbox', [0, 0, graphWidth, graphHeight])
-      .attr('preserveAspectRatio','xMinYMin')
-      .append('g')
-        .attr('transform', 'translate(10, 0)');
+      .attr('viewBox', [0, 0, graphWidth, graphHeight])
+      .attr('preserveAspectRatio','xMinYMin meet');
 
     // X-Axis
     const x = d3.scaleLinear()
@@ -49,7 +47,7 @@ d3.csv('./data/generic-dataset.csv').then((data) => {
       .padding(2);
 
     svg.append('g')
-      .call(d3.axisLeft(y).tickFormat(d => '').tickSize(0));
+      .call(d3.axisLeft(y).tickFormat(d => '').tickSize(0));  // Hide ticks and numbers on y-axis
 
     // Bars
     const bar = svg.selectAll('.bar')
